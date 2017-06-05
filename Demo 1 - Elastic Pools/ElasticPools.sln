@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.6
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{90AFEB58-A12F-4476-BA0C-9E23F7D7E972}"
+	ProjectSection(SolutionItems) = preProject
+		Scripts\1-CreatePool.ps1 = Scripts\1-CreatePool.ps1
+		Scripts\2-SetupElasticJobTools.ps1 = Scripts\2-SetupElasticJobTools.ps1
+		Scripts\3-CreateElasticJob.ps1 = Scripts\3-CreateElasticJob.ps1
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShardManagerDemo", "ShardManagerDemo\ShardManagerDemo.csproj", "{E02DEEED-C6BD-415A-BA77-336E92586B9A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E02DEEED-C6BD-415A-BA77-336E92586B9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E02DEEED-C6BD-415A-BA77-336E92586B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E02DEEED-C6BD-415A-BA77-336E92586B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E02DEEED-C6BD-415A-BA77-336E92586B9A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.TransientFaultHandling.6.0.1304.0\lib\portable-net45+win+wp8;packages\EnterpriseLibrary.TransientFaultHandling.Data.6.0.1304.1\lib\NET45
+	EndGlobalSection
+EndGlobal
