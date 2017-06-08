@@ -1,0 +1,6 @@
+requests
+| where timestamp >= ago(30m) 
+| extend tenantId = tostring(customDimensions.TenantId)
+| summarize avg(duration) by tenantId
+| order by tenantId asc 
+| render barchart kind=unstacked
