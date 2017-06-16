@@ -1,5 +1,5 @@
 requests
-| where timestamp >= ago(30m) 
+| where timestamp >= ago(60m) 
 | extend tenantId = tostring(customDimensions.TenantId)
 | summarize avg(duration) by tenantId
 | order by tenantId asc 

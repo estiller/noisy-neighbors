@@ -53,7 +53,6 @@ namespace ShardManagerDemo
             // and reference tables.
             CreateSchemaInfo(shardMapManager, shardMap.Name);
 
-
             // If there are no shards, add shards
             if (!shardMap.GetShards().Any())
             {
@@ -61,6 +60,10 @@ namespace ShardManagerDemo
                 {
                     CreateShard(shardMap, i);
                 }
+            }
+            else
+            {
+                Console.WriteLine("Shards already exist");
             }
             return shardMap;
         }
@@ -70,6 +73,11 @@ namespace ShardManagerDemo
         /// </summary>
         private static void CreateSchemaInfo(ShardMapManager shardMapManager, string shardMapName)
         {
+            if (shardMapManager.GetSchemaInfoCollection().TryGet(shardMapName, out SchemaInfo output))
+            {
+                return;
+            }
+
             // Create schema info
             SchemaInfo schemaInfo = new SchemaInfo();
             schemaInfo.Add(new ReferenceTableInfo("Regions"));
@@ -88,7 +96,7 @@ namespace ShardManagerDemo
 
             // Create a mapping to that shard.
             PointMapping<int> mappingForNewShard = shardMap.CreatePointMapping(new PointMappingCreationInfo<int>(idForNewShard, shard, MappingStatus.Online));
-            Console.WriteLine("Mapped range {0} to shard {1}", mappingForNewShard.Value, shard.Location.Database);
+            Console.WriteLine("Mapped point {0} to shard {1}", mappingForNewShard.Value, shard.Location.Database);
         }
 
         private static Shard CreateOrGetEmptyShard(ListShardMap<int> shardMap)

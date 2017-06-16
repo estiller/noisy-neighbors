@@ -1,7 +1,7 @@
 Param(
     [string]$ResourceGroupName = "MonitoringDemo",
     [string]$Location = "westeurope",
-    [string]$AppInsightsName = "monitoringdemo123"
+    [string]$AppInsightsName = "monitoringdemo"
 )
 
 # Login-AzureRmAccount

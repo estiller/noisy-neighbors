@@ -1,10 +1,10 @@
 Param(
     [string]$ResourceGroupName = "EncryptionSessionDemo",
     [string]$Location = "westeurope",
-    [string]$KeyVaultName = "encryptionsessiondemo123",
-	[string]$ServicePrincipalName = "encryptionsessiondemo123",
+    [string]$KeyVaultName = "encryptionsessiondemo",
+	[string]$ServicePrincipalName = "encryptionsessiondemo",
 	[string]$ServicePrincipalPassword = "VerySecurePassword",
-    [string]$StorageAccountName = "encryptionsessiondemo123"
+    [string]$StorageAccountName = "encryptionsessiondemo"
 )
 
 # Login-AzureRmAccount
@@ -29,7 +29,7 @@ Sleep 20
 Write-Host "Application ID is: $($sp.ApplicationId)"
 
 Write-Host 'Provide access to SP on KeyVault'
-Set-AzureRmKeyVaultAccessPolicy -VaultName $KeyVaultName -ServicePrincipalName $sp.ServicePrincipalNames[0] -PermissionsToKeys decrypt,encrypt,create,delete
+Set-AzureRmKeyVaultAccessPolicy -VaultName $KeyVaultName -ServicePrincipalName $sp.ServicePrincipalNames[0] -PermissionsToKeys all
 
 # Create a storage account
 Write-Host 'Creating a storage account'

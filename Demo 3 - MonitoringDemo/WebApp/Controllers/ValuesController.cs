@@ -36,7 +36,7 @@ namespace WebApp.Controllers
             int delayMs;
             lock (Random)
             {
-                delayMs = Random.Next(500);
+                delayMs = Random.Next(1000);
             }
             return delayMs;
         }

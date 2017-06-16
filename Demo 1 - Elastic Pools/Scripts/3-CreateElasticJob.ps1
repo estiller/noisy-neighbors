@@ -3,8 +3,12 @@
 Use-AzureSqlJobConnection -CurrentAzureSubscription
 
 $credentialName = "MyCredential"
-$databaseCredential = Get-Credential -Message "Enter target credential"
-$credential = New-AzureSqlJobCredential -Credential $databaseCredential -CredentialName $credentialName
+$credential = Get-AzureSqlJobCredential -CredentialName $credentialName
+if (!$credential)
+{
+    $databaseCredential = Get-Credential -Message "Enter target credential"
+    $credential = New-AzureSqlJobCredential -Credential $databaseCredential -CredentialName $credentialName
+}
 Write-Output $credential
 
 $scriptName = "Create a TestTable"
@@ -19,7 +23,11 @@ END
 GO
 INSERT INTO TestTable(InsertionTime) VALUES (sysutcdatetime());
 GO"
-$script = New-AzureSqlJobContent -ContentName $scriptName -CommandText $scriptCommandText
+$script = Get-AzureSqlJobContent -ContentName $scriptName
+if (!$script)
+{
+    $script = New-AzureSqlJobContent -ContentName $scriptName -CommandText $scriptCommandText
+}
 Write-Output $script
 
 $jobName = "MyJob"

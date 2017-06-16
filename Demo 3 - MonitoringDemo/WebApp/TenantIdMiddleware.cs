@@ -25,7 +25,7 @@ namespace WebApp
             var authrizationHeaderValue = AuthenticationHeaderValue.Parse(authorizationHeader);
             if (authrizationHeaderValue.Scheme == "tenant")
             {
-                context .SetTenantId(authrizationHeaderValue.Parameter);
+                context.SetTenantId(authrizationHeaderValue.Parameter);
             }
 
             return _next(context);
