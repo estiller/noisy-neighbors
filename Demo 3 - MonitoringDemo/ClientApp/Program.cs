@@ -46,10 +46,17 @@ namespace ClientApp
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                var tenantId = random.Next(MaxTenantId).ToString(CultureInfo.InvariantCulture);
-                var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:33729/api/values");
-                request.Headers.Authorization = new AuthenticationHeaderValue("tenant", tenantId);
-                await client.SendAsync(request, cancellationToken);
+                try
+                {
+                    var tenantId = random.Next(MaxTenantId).ToString(CultureInfo.InvariantCulture);
+                    var request = new HttpRequestMessage(HttpMethod.Get, "http://localhost:50617/api/values");
+                    request.Headers.Authorization = new AuthenticationHeaderValue("tenant", tenantId);
+                    await client.SendAsync(request, cancellationToken);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An exception occured while sending a request: {ex}");
+                }
             }
         }
     }

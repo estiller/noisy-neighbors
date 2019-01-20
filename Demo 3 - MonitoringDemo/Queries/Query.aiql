@@ -1,6 +1,7 @@
 requests
 | where timestamp >= ago(60m) 
 | extend tenantId = tostring(customDimensions.TenantId)
+| where isnotempty(tenantId)
 | summarize avg(duration) by tenantId
 | order by tenantId asc 
 | render barchart kind=unstacked
