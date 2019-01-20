@@ -7,7 +7,7 @@ Param(
     [string]$StorageAccountName = "encryptionsessiondemo"
 )
 
-# Login-AzureRmAccount
+# Connect-AzureRmAccount
 
 # Create a new resource group
 $resourceGroup = Get-AzureRmResourceGroup -Name $ResourceGroupName -ErrorAction SilentlyContinue
@@ -24,7 +24,8 @@ $kv = New-AzureRmKeyVault -VaultName $KeyVaultName -ResourceGroupName $ResourceG
 
 # Create a Service Principal
 Write-Host 'Creating a service principal'
-$sp = New-AzureRmADServicePrincipal -DisplayName $ServicePrincipalName -Password $ServicePrincipalPassword
+$ServicePrincipalPasswordSecure = ConvertTo-SecureString -String $ServicePrincipalPassword -AsPlainText -Force
+$sp = New-AzureRmADServicePrincipal -DisplayName $ServicePrincipalName -Password $ServicePrincipalPasswordSecure
 Sleep 20
 Write-Host "Application ID is: $($sp.ApplicationId)"
 
