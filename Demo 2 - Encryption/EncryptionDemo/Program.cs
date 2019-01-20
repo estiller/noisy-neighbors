@@ -60,16 +60,16 @@ namespace EncryptionDemo
             var container = await GetBlobContainerAsync(tenant.ContainerName);
 
             var cloudResolver = new KeyVaultKeyResolver(GetTokenAsync);
-            IKey rsa = await cloudResolver.ResolveKeyAsync(GetKeyUrl(tenant.KeyName), CancellationToken.None);
+            IKey key = await cloudResolver.ResolveKeyAsync(GetKeyUrl(tenant.KeyName), CancellationToken.None);
 
-            CloudBlob blob = await UploadBlobAsync(container, rsa);
+            CloudBlob blob = await UploadBlobAsync(container, key);
 
             await DownloadBlobAsync(blob, cloudResolver);
         }
 
-        private static async Task<CloudBlockBlob> UploadBlobAsync(CloudBlobContainer container, IKey rsa)
+        private static async Task<CloudBlockBlob> UploadBlobAsync(CloudBlobContainer container, IKey key)
         {
-            BlobEncryptionPolicy policy = new BlobEncryptionPolicy(rsa, null);
+            BlobEncryptionPolicy policy = new BlobEncryptionPolicy(key, null);
             BlobRequestOptions options = new BlobRequestOptions { EncryptionPolicy = policy };
 
             CloudBlockBlob blob = container.GetBlockBlobReference("MyFile.txt");
