@@ -19,12 +19,7 @@ namespace EncryptionDemo
 
         private static string GetKeyUrl(string keyName) => $"{KeyVaultUrl}/keys/{keyName}";
 
-        static void Main()
-        {
-            MainAsync().GetAwaiter().GetResult();
-        }
-
-        private static async Task MainAsync()
+        static async Task Main()
         {
             TenantInfo tenant1 = await CreateTenantAsync(Guid.NewGuid());
             TenantInfo tenant2 = await CreateTenantAsync(Guid.NewGuid());
